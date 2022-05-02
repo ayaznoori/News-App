@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News App</title>
+  </head>
+ <style>
+   body{
+     margin: 0;
+   }
+   #navbar{
+     display: flex;
+     background-color: teal;
+     padding: 10px;
+     justify-content: space-evenly;
+     position: fixed;
+     width: 100%;
+     z-index: 9999;
+ 
+   }
+    #search_input{
+      width:70%;
+      border-radius: 5px;
+    }
+    #navbar>a{
+      text-decoration: none;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+      
+    }
+    #container{
+      width: 100%;
+      display: flex;
+      padding-top: 50px;
+    }
+    #sidebar{
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 20%;
+      font-size: 25px;
+      cursor: pointer;
+      align-items: center;
+ 
+    }
+    #sidebar>a{
+      background-color: black;
+      color: white;
+      padding: 10px;
+      width: 60%;
+      border-radius: 5px;
+      text-align: center;
+    }
+    #results{
+      width: 80%;
+      background-color: rgb(241, 240, 240);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 10px;
+    
+    }
+    .news{
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+      border: 1px solid black;
+      gap: 15px;
+    }
+ </style>
+
+  <body>
+    <!-- Give Navbar with id "navbar"  -->
+    <!-- Navbar will have input with id search_input and a link to home page i.e. index.html -->
+    <div id="navbar">
+      
+    </div>
+    <!-- Sidebar will have id "sidebar"  -->
+    <!-- Give link to top headlines of countries in sidebar with id as their country codes 
+    india :- in
+    china :- ch
+    usa :- us
+    uk : uk
+    Newzeland :- nz -->
+    <div id="container">
+      <div id="sidebar">
+        <a id="in" onclick="displaydata('in')">India</a>
+        <a  id="ch" onclick="displaydata('ch')">China</a>
+        <a id="us" onclick="displaydata('us')">USA</a>
+        <a id="uk" onclick="displaydata('uk')">UK</a>
+        <a  id="nz" onclick="displaydata('nz')">Newzeland</a>
+      </div>
+      <div id="results">
+  
+      </div>
+ 
+    </div>
+ 
+
+    <!-- Append results inside div with id "results"  -->
+    <!-- News divs will have class "news"  -->
+  </body>
+</html>
+<script type="module" src="scripts/index.js">
+</script>
+<script>
+ function inputdata( event ){
+    if(event.keyCode == 13){
+    let input_data=document.getElementById("search_input").value;
+    window.location.href="search.html";
+    fetchdata(input_data);
+    }
+  }
+
+  async function displaydata(data){
+
+    document.getElementById("results").innerText="";
+    let url=`https://masai-mock-api.herokuapp.com/news/top-headlines?country=${data}`;
+    let temp= await fetch(url);
+    let fdata= (await temp.json()).articles;
+    console.log(fdata);
+    fdata.forEach(({title,urlToImage,url,description},i)=> {
+
+      let bag=document.createElement("div");
+      let content=document.createElement("div");
+      let img=document.createElement("img");
+      img.style.width="150px";
+      img.src=urlToImage;
+      content.append(img);
+      let content2=document.createElement("div")
+      let dis=document.createElement("div");
+      dis.innerText=description;
+      let tit=document.createElement("h3");
+      tit.innerText=title;
+      content2.append(tit,description)
+      bag.append(content,content2);
+      bag.setAttribute("class","news");
+      bag.setAttribute("onclick","()=>{alert('hi')}");
+   
+      document.getElementById("results").append(bag);
+      
+    });
+  }
+  displaydata("in");
+ 
+</script>
