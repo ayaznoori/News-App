@@ -115,36 +115,42 @@
     fetchdata(input_data);
     }
   }
-
+ 
   async function displaydata(data){
-
+  
     document.getElementById("results").innerText="";
     let url=`https://masai-mock-api.herokuapp.com/news/top-headlines?country=${data}`;
     let temp= await fetch(url);
     let fdata= (await temp.json()).articles;
-    console.log(fdata);
-    fdata.forEach(({title,urlToImage,url,description},i)=> {
-
+   
+    fdata.forEach(({title,urlToImage,url,description,content},i)=> {
+    
       let bag=document.createElement("div");
-      let content=document.createElement("div");
+      let content1=document.createElement("div");
       let img=document.createElement("img");
       img.style.width="150px";
       img.src=urlToImage;
-      content.append(img);
+      content1.append(img);
       let content2=document.createElement("div")
       let dis=document.createElement("div");
       dis.innerText=description;
       let tit=document.createElement("h3");
       tit.innerText=title;
       content2.append(tit,description)
-      bag.append(content,content2);
+      bag.append(content1,content2);
       bag.setAttribute("class","news");
-      bag.setAttribute("onclick","()=>{alert('hi')}");
-   
+
+      bag.setAttribute("onclick","fun()");
       document.getElementById("results").append(bag);
-      
+     
     });
+  
+  
   }
   displaydata("in");
- 
+  function fun(){
+    
+    window.location.href="news.html"
+     
+  }
 </script>

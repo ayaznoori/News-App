@@ -6,6 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detailed news</title>
   </head>
+  <style>
+    body{
+      margin: 0;
+    }
+    #navbar{
+      display: flex;
+      background-color: teal;
+      padding: 10px;
+      justify-content: space-evenly;
+      position: fixed;
+      width: 100%;
+      z-index: 9999;
+  
+    }
+     #search_input{
+       width:70%;
+       border-radius: 5px;
+     }
+     #navbar>a{
+       text-decoration: none;
+       color: white;
+       font-size: 25px;
+       cursor: pointer;
+       
+     }
+     #container{
+       width: 100%;
+       display: flex;
+       padding-top: 50px;
+     }
+     #sidebar{
+       padding-top: 20px;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       width: 20%;
+       font-size: 25px;
+       cursor: pointer;
+       align-items: center;
+  
+     }
+     #sidebar>a{
+       background-color: black;
+       color: white;
+       padding: 10px;
+       width: 60%;
+       border-radius: 5px;
+       text-align: center;
+     }
+     #results{
+       width: 80%;
+       background-color: rgb(241, 240, 240);
+       display: flex;
+       flex-direction: column;
+       gap: 20px;
+       padding: 10px;
+     
+     }
+     .news{
+       display: flex;
+       flex-direction: row;
+       padding: 10px;
+       border: 1px solid black;
+       gap: 15px;
+     }
+  </style>
   <body>
     <div id="navbar">
       
@@ -15,10 +81,10 @@
   </body>
 </html>
 <script type="module">
-import { navbar , inputdata } from '/components/navbar.js';
+import { navbar} from '/components/navbar.js';
 document.getElementById("navbar").innerHTML=navbar();
 
 </script>
 <script>
-  
+
 </script>
